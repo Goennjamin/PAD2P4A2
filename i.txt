@@ -1,0 +1,56 @@
+ std::vector<std::string> wordlist;
+    std::vector<worddata> finallist {};
+
+
+
+
+
+    while (file >> word){ // >> operator skips whitespaces
+
+        wordlist.push_back(word);
+        word.clear();
+
+    }
+
+    int counter = 0;
+
+    for(int i = 0; i < wordlist.size(); i++){
+
+        if(counter > 0 && checkWord(wordlist,finallist)){
+
+            finallist.at(i).setCounter(finallist.at(i).getCounter() + 1);
+
+        }else{
+
+
+            worddata w1(1,wordlist.at(i));
+            finallist.push_back(w1);
+            counter ++;
+        }
+
+
+    }
+
+    std::cout << finallist.at(2).getWord();
+
+    file.close();
+}
+
+bool checkWord(std::vector<std::string> vector1, std::vector<worddata> vector2) {
+    for(int i = 0; i < vector2.size(); i++){
+
+        for(int j = 1; j < vector1.size(); j++){
+
+            if(vector1.at(j) == vector2.at(i).getWord()){
+                return true;
+            }else{
+               
+                continue;
+            }
+
+        }
+
+    }
+    return false;
+}
+
